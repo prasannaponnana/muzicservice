@@ -7,13 +7,16 @@ import com.stackroute.muzixService.exceptions.TrackAlreadyExistsException;
 import com.stackroute.muzixService.exceptions.TrackNotFoundException;
 import com.stackroute.muzixService.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import springfox.documentation.annotations.Cacheable;
 
 import java.util.List;
 
 @Service
 @Primary
+
 class TrackServiceImpl implements TrackService{
     TrackRepository trackRepository;
 
