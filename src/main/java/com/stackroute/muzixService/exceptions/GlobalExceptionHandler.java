@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
     public class GlobalExceptionHandler {
 
         @ExceptionHandler(Exception.class)
-        public ResponseEntity<ErrorMessage> resourceNotFoundException(TrackAlreadyExists ex) {
+        public ResponseEntity<ErrorMessage> resourceNotFoundException(TrackAlreadyExistsException ex) {
             ErrorMessage errorDetails = new ErrorMessage(ex.getMessage(),"Can't save");
             return new ResponseEntity<ErrorMessage>(errorDetails, HttpStatus.NOT_FOUND);
         }

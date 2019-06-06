@@ -22,7 +22,7 @@ public interface TrackService {
 
     List<Track> getAllTracks();
 
-    Track updateTrack(int trackIid, String comment) throws SameCommentExists;
+    Track updateTrack(int trackIid, String comment) throws TrackNotFoundException;
 
     Track deleteTrack(int trackId) throws TrackNotFoundException;
 

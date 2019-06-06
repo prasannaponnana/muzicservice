@@ -32,19 +32,19 @@ public class TrackController {
         return responseEntity;
     }
     @PutMapping("track/{id}/{comments}")
-    public ResponseEntity<?> updateTrack(@PathVariable("id") int id,@PathVariable("comments") String trackComments){
+    public ResponseEntity<?> updateTrack(@PathVariable("id") int trackId,@PathVariable("comments") String trackComments) throws TrackNotFoundException{
         ResponseEntity responseEntity;
         try{
-            Track updatedTrack = trackService.updateTrack(id,trackComments);
+            Track updatedTrack = trackService.updateTrack(trackId,trackComments);
             responseEntity = new ResponseEntity<Track>(updatedTrack , HttpStatus.OK);
         }
-        catch (SameCommentExists ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage() , HttpStatus.CONFLICT);
+        catch (TrackNotFoundException ex){
+            responseEntity = new ResponseEntity<String>(ex.getMessage() , HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }
 
-    @DeleteMapping("/track")
+    @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable("id") int id){
         ResponseEntity responseEntity;
         try{
@@ -79,5 +79,10 @@ public class TrackController {
         }
         return responseEntity;
     }
+    /*@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity saveTracks1(@RequestBody Track track){
+        trackService.saveTracks1(track);
+        return new ResponseEntity<Track>(track, HttpStatus.OK);
+    }*/
 }
 
